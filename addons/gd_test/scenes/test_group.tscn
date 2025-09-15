@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://dywo1oyo0wmrl"]
+
+[ext_resource type="Texture2D" uid="uid://drw53sbhx7kxl" path="res://addons/gd_test/assets/icons/Play.svg" id="1_3pnwx"]
+
+[node name="TestGroup" type="Label"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+scale = Vector2(0.994377, 1.00443)
+size_flags_horizontal = 3
+size_flags_vertical = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.894
+anchor_right = 0.991
+anchor_bottom = 0.968
+offset_left = 0.111938
+offset_right = 0.36792
+offset_bottom = -0.00800133
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("1_3pnwx")
+icon_alignment = 1
+expand_icon = true

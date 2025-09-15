@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://ehw8imbw1yjq"]
+
+[ext_resource type="Script" uid="uid://bfsh82i5w413i" path="res://addons/gd_test/scripts/test_dock.gd" id="1_x1xak"]
+
+[node name="Test" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x1xak")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FolderSelectButton" type="Button" parent="GridContainer"]
+z_index = 1
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Select Folder"
+
+[node name="DirectoryLabel" type="Label" parent="GridContainer"]
+unique_name_in_owner = true
+z_index = 1
+layout_mode = 2
+text = "Current Directory: res://scenes/test/"
+
+[node name="Panel" type="Panel" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TestGroupGridContainer" type="ScrollContainer" parent="GridContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TestGroupVBox" type="VBoxContainer" parent="GridContainer/Panel/TestGroupGridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+
+[connection signal="pressed" from="GridContainer/FolderSelectButton" to="." method="_on_folder_select_button_pressed"]

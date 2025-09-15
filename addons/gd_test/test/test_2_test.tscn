@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://xe03nx8m7xw2"]
+
+[ext_resource type="Script" uid="uid://bnajaafsnydhp" path="res://addons/gd_test/scripts/test_system.gd" id="1_lmj1g"]
+[ext_resource type="Script" uid="uid://c2sgk2rl7njgi" path="res://addons/gd_test/scripts/test.gd" id="2_18ait"]
+[ext_resource type="Script" uid="uid://dnfa4ipmmyq70" path="res://addons/gd_test/test/test_test.gd" id="3_n4amx"]
+[ext_resource type="Script" uid="uid://gyp65lp0cs5k" path="res://addons/gd_test/test/actual_test_test.gd" id="4_fha1x"]
+[ext_resource type="Script" uid="uid://cj4eg6kjcwsdb" path="res://addons/gd_test/test/signal_test.gd" id="5_awpku"]
+
+[node name="Test 2" type="Node2D"]
+script = ExtResource("1_lmj1g")
+
+[node name="Test" type="Node" parent="."]
+script = ExtResource("2_18ait")
+metadata/_custom_type_script = "uid://c2sgk2rl7njgi"
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("3_n4amx")
+
+[node name="Manhattan Distance Test" type="Node" parent="."]
+script = ExtResource("4_fha1x")
+
+[node name="Button" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="Signal Test" type="Node" parent="." node_paths=PackedStringArray("button")]
+script = ExtResource("5_awpku")
+button = NodePath("../Button")

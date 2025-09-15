@@ -1,0 +1,56 @@
+[gd_scene load_steps=11 format=3 uid="uid://8iqv4exeqpdx"]
+
+[ext_resource type="Script" uid="uid://bnajaafsnydhp" path="res://addons/gd_test/scripts/test_system.gd" id="1_icko6"]
+[ext_resource type="Script" uid="uid://441qi8ajru7s" path="res://scripts/sph_sim.gd" id="2_8ew16"]
+[ext_resource type="Script" uid="uid://dfideae23njx3" path="res://scripts/multi_mesh_sph_visualizer.gd" id="3_2j0ps"]
+[ext_resource type="Script" uid="uid://croivw5bq4gch" path="res://scripts/camera/pivot_camera.gd" id="4_k50nr"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_8ew16"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_2j0ps"]
+sky_material = SubResource("ProceduralSkyMaterial_8ew16")
+
+[sub_resource type="Environment" id="Environment_k50nr"]
+background_mode = 2
+sky = SubResource("Sky_2j0ps")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="MultiMesh" id="MultiMesh_k50nr"]
+transform_format = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k50nr"]
+albedo_color = Color(0.16, 0.622, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_k50nr"]
+material = SubResource("StandardMaterial3D_k50nr")
+radius = 0.2
+height = 0.4
+
+[node name="SphManualTest" type="Node3D"]
+script = ExtResource("1_icko6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_k50nr")
+
+[node name="SphSim" type="Node3D" parent="."]
+script = ExtResource("2_8ew16")
+metadata/_custom_type_script = "uid://441qi8ajru7s"
+
+[node name="MultiMeshSphVisualizer" type="MultiMeshInstance3D" parent="SphSim"]
+multimesh = SubResource("MultiMesh_k50nr")
+script = ExtResource("3_2j0ps")
+mesh = SubResource("SphereMesh_k50nr")
+
+[node name="PivotCamera" type="Node3D" parent="."]
+script = ExtResource("4_k50nr")
+arm_length = 40.0
+speed_scaling = 300.0
+
+[node name="Camera3D" type="Camera3D" parent="PivotCamera"]

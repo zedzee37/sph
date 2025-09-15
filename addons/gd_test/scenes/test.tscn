@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://boaw44ocirg83"]
+
+[ext_resource type="Script" uid="uid://dvayrxsmwvjxg" path="res://addons/gd_test/scripts/test_manager.gd" id="1_errlg"]
+
+[node name="Test" type="Node2D"]
+
+[node name="TestManager" type="Node" parent="."]
+script = ExtResource("1_errlg")
+test_path = "res://addons/gd_test/test"
+metadata/_custom_type_script = "uid://dvayrxsmwvjxg"

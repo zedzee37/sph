@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5kw17rmou2ox"]
+
+[ext_resource type="Script" uid="uid://dvayrxsmwvjxg" path="res://addons/gd_test/scripts/test_manager.gd" id="1_yjhkn"]
+
+[node name="SphTest" type="Node3D"]
+script = ExtResource("1_yjhkn")
+test_path = "res://test/sph_test/"
