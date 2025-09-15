@@ -41,6 +41,7 @@ environment = SubResource("Environment_k50nr")
 
 [node name="SphSim" type="Node3D" parent="."]
 script = ExtResource("2_8ew16")
+bounding_box_size = 5
 metadata/_custom_type_script = "uid://441qi8ajru7s"
 
 [node name="MultiMeshSphVisualizer" type="MultiMeshInstance3D" parent="SphSim"]
@@ -50,7 +51,7 @@ mesh = SubResource("SphereMesh_k50nr")
 
 [node name="PivotCamera" type="Node3D" parent="."]
 script = ExtResource("4_k50nr")
-arm_length = 40.0
+arm_length = 16.0
 speed_scaling = 300.0
 
 [node name="Camera3D" type="Camera3D" parent="PivotCamera"]
