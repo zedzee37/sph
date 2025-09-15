@@ -42,6 +42,7 @@ environment = SubResource("Environment_k50nr")
 [node name="SphSim" type="Node3D" parent="."]
 script = ExtResource("2_8ew16")
 bounding_box_size = 5
+smoothing_radius = 1.5
 metadata/_custom_type_script = "uid://441qi8ajru7s"
 
 [node name="MultiMeshSphVisualizer" type="MultiMeshInstance3D" parent="SphSim"]
