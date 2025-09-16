@@ -61,12 +61,12 @@ func _calculate_density(index: int) -> float:
 			continue
 
 		var particle: Particle = _particles[i]
-		density += mass * poly6_kernel(pos.distance_squared_to(particle.position))
+		density += mass * _poly6_kernel(pos.distance_squared_to(particle.position))
 
 	return density
 
 
-func poly6_kernel(d2: float) -> float:
+func _poly6_kernel(d2: float) -> float:
 	var h2 := smoothing_radius**2
 	if d2 > h2:
 		return 0.0
@@ -75,9 +75,17 @@ func poly6_kernel(d2: float) -> float:
 	return (315/(64*PI*(smoothing_radius**9)))*factor
 
 
-func spiky_kernel(d: float) -> float:
+func _spiky_kernel(d: float) -> float:
 	if d > smoothing_radius:
 		return 0.0
 
 	var factor := (smoothing_radius - d)**3
 	return (15/(PI*(smoothing_radius**6)))*factor
+
+
+func _delta_spiky_kernel(d: float) -> float:
+	if d > smoothing_radius:
+		return 0.0
+
+	var factor := (smoothing_radius - d)**2
+	return (-45/(PI*(smoothing_radius**6)))*factor
