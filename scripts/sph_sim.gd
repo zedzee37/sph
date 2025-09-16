@@ -46,7 +46,7 @@ func _update_simulation(_delta: float) -> void:
 	_calculate_densities()
 
 
-func _calculate_densities():
+func _calculate_densities() -> void:
 	for i: int in range(particle_count):
 		_particles[i].density = _calculate_density(i)
 		print_debug(_particles[i].density)
