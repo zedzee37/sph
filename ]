@@ -1,0 +1,93 @@
+using Godot;
+using System.Collections.Generic;
+
+public partial class CurveGradientThing : Node2D
+{
+	[Export] private float pixelsPerMeter = 100;
+	[Export] private float smoothingRadius = 1.0f;
+	[Export] private int particleCount = 200;
+	[Export] private float mass = 1.0f;
+
+	private List<Particle> particles = new List<Particle>();
+	private float smoothingRadiusSquared = 0.0f;
+	
+    public override void _Ready()
+    {
+		smoothingRadius /= pixelsPerMeter;
+		smoothingRadiusSquared = smoothingRadius*smoothingRadius;
+
+		RandomNumberGenerator rng = new RandomNumberGenerator();
+		rng.Randomize();
+
+		int displayWidth = (int)ProjectSettings.GetSetting(
+				"display/window/size/viewport_width"
+		);
+		int displayHeight = (int)ProjectSettings.GetSetting(
+				"display/window/size/viewport_height"
+		);
+
+		for (int i = 0; i < particleCount; i++)
+		{
+			particles.Add(new Particle(
+				new Vector2(
+					rng.RandiRange(0, displayWidth) / pixelsPerMeter,
+					rng.RandiRange(0, displayHeight) / pixelsPerMeter
+				)
+			));
+		}
+    }
+
+	public override void _Process(double delta)
+	{
+		QueueRedraw();
+	}
+
+	public override void _Draw()
+	{
+		foreach (Particle particle in particles)
+		{
+			float density = CalculateDensity(particle.Position);
+			DrawCircle(particle.Position * pixelsPerMeter, density, Colors.White);	
+			// DrawCircle(particle.Position * pixelsPerMeter, smoothingRadius * pixelsPerMeter, Colors.Red, false);
+		}
+	}
+
+	private float CalculateDensity(Vector2 position)
+	{
+		float density = 0.0f;
+		foreach (Particle particle in particles)
+		{
+			float distanceSquared = particle.Position.DistanceSquaredTo(position);
+			density += Poly6Kernel(distanceSquared) * mass;
+		}
+		return density;
+	}
+
+	private float Poly6Kernel(float distanceSquared)
+	{
+		if (distanceSquared > smoothingRadiusSquared)
+		{
+			return 0.0f;
+		}
+
+		float factor = Mathf.Pow(smoothingRadiusSquared - distanceSquared, 3);
+		float coefficient = 315 / (64*Mathf.Pi*Mathf.Pow(smoothingRadius, 9));
+		return coefficient * factor;
+	}
+
+	public struct Particle 
+	{
+		public Vector2 Position;
+		public Vector2 Velocity;
+		public float Density;
+		public Vector2 Pressure;
+
+		public Particle(Vector2 position)
+		{
+			this.Position = position;
+			this.Velocity = Vector2.Zero;
+			this.Density = 0.0f;
+			this.Pressure = Vector2.Zero;
+		}
+	}
+}

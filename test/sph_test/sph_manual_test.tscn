@@ -42,8 +42,11 @@ environment = SubResource("Environment_k50nr")
 
 [node name="SphSim" type="Node3D" parent="."]
 script = ExtResource("2_8ew16")
+particle_count = 200
 bounding_box_size = 5
 smoothing_radius = 1.5
+pressure_multiplier = 25.0
+tmp_target_density = 1000.0
 metadata/_custom_type_script = "uid://441qi8ajru7s"
 
 [node name="MultiMeshSphVisualizer" type="MultiMeshInstance3D" parent="SphSim"]
